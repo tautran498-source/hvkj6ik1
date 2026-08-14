@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Thư Gửi Linh ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920')
+                center center / cover no-repeat;
+        }
+
+
+        /* =========================
+           LỚP PHỦ NỀN
+        ========================= */
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+
+            background: rgba(0, 0, 0, .25);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           PHONG BÌ
+        ========================= */
+
+        .envelope-container {
+            position: relative;
+            z-index: 10;
+
+            perspective: 1200px;
+        }
+
+
+        .envelope {
+            width: 320px;
+            height: 220px;
+
+            position: relative;
+
+            cursor: pointer;
+        }
+
+
+        .base {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            background: #f6b0c0;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .35);
+        }
+
+
+        /* Nắp phong bì */
+
+        .flap {
+            position: absolute;
+
+            width: 0;
+            height: 0;
+
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid #ec8ea5;
+
+            transform-origin: top;
+
+            transition: 1s;
+
+            z-index: 5;
+        }
+
+
+        /* Con dấu trái tim */
+
+        .seal {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: 60px;
+            height: 60px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 30px;
+
+            z-index: 6;
+
+            box-shadow:
+                0 0 15px rgba(255, 255, 255, .8);
+
+            animation: heartbeat 1.2s infinite;
+        }
+
+
+        @keyframes heartbeat {
+
+            0% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+
+            15% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.25);
+            }
+
+            30% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+
+            45% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.18);
+            }
+
+            60% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+
+            100% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           LÁ THƯ
+        ========================= */
+
+        .letter {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(255, 255, 255, .97);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: 1s;
+
+            z-index: 100;
+
+            padding: 30px;
+        }
+
+
+        .letter-content {
+            max-width: 800px;
+            width: 100%;
+        }
+
+
+        .letter-content h1 {
+            color: #c2185b;
+
+            margin-bottom: 30px;
+
+            font-size: 42px;
+        }
+
+
+        #typingText {
+            color: #880e4f;
+
+            font-size: 24px;
+
+            line-height: 1.9;
+
+            min-height: 200px;
+        }
+
+
+        #typingText::after {
+            content: "|";
+
+            animation: blink .8s infinite;
+        }
+
+
+        @keyframes blink {
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================
+           NÚT TIẾP TỤC
+        ========================= */
+
+        .continue-btn {
+
+            margin-top: 35px;
+
+            padding: 14px 35px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c2185b,
+                    #ec407a
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px
+                rgba(194, 24, 91, .35);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(20px);
+
+            transition: .6s ease;
+        }
+
+
+        .continue-btn.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+
+        .continue-btn:hover {
+
+            transform:
+                translateY(-3px)
+                scale(1.03);
+
+            box-shadow:
+                0 12px 30px
+                rgba(194, 24, 91, .45);
+        }
+
+
+        /* =========================
+           MÀN HÌNH CÂU HỎI
+        ========================= */
+
+        .question-screen {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 200;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe4ec,
+                    #fff0f5,
+                    #ffd6e5
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: scale(1.05);
+
+            transition:
+                opacity .8s ease,
+                visibility .8s ease,
+                transform .8s ease;
+
+            padding: 30px;
+        }
+
+
+        .question-screen.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: scale(1);
+        }
+
+
+        .question-content {
+
+            max-width: 700px;
+
+            width: 100%;
+        }
+
+
+        /* Tim lớn */
+
+        .big-heart {
+
+            font-size: 80px;
+
+            margin-bottom: 20px;
+
+            animation:
+                heartBeatQuestion 1.2s infinite;
+        }
+
+
+        @keyframes heartBeatQuestion {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.25);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+
+        .question-content h1 {
+
+            color: #c2185b;
+
+            font-size: 42px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .question-content p {
+
+            color: #880e4f;
+
+            font-size: 20px;
+
+            margin-bottom: 40px;
+        }
+
+
+        /* =========================
+           HAI NÚT TRẢ LỜI
+        ========================= */
+
+        .answer-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        .answer-buttons button {
+
+            border: none;
+
+            padding: 15px 35px;
+
+            border-radius: 35px;
+
+            font-size: 19px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: .3s ease;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, .15);
+        }
+
+
+        /* Nút đồng ý */
+
+        .yes-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e91e63,
+                    #c2185b
+                );
+
+            color: white;
+        }
+
+
+        .yes-btn:hover {
+
+            transform:
+                scale(1.08);
+
+            box-shadow:
+                0 12px 30px
+                rgba(194, 24, 91, .35);
+        }
+
+
+        /* Nút không */
+
+        .no-btn {
+
+            background: white;
+
+            color: #c2185b;
+
+            position: relative;
+
+            transition:
+                left .25s ease,
+                top .25s ease,
+                transform .2s ease;
+
+            z-index: 10;
+        }
+
+
+        .no-btn:hover {
+
+            transform: scale(.95);
+        }
+
+
+        /* =========================
+           HOA HỒNG
+        ========================= */
+
+        .rose {
+
+            position: absolute;
+
+            top: -50px;
+
+            animation:
+                fall linear infinite;
+
+            z-index: 2;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes fall {
+
+            from {
+
+                transform:
+                    translateY(-50px)
+                    rotate(0deg);
+            }
+
+            to {
+
+                transform:
+                    translateY(120vh)
+                    rotate(360deg);
+            }
+        }
+
+
+        /* =========================
+           TIM BAY
+        ========================= */
+
+        .heart {
+
+            position: absolute;
+
+            animation:
+                floatUp linear infinite;
+
+            z-index: 2;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes floatUp {
+
+            from {
+
+                transform:
+                    translateY(100vh)
+                    scale(.5);
+
+                opacity: 1;
+            }
+
+            to {
+
+                transform:
+                    translateY(-100px)
+                    scale(1.5);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================
+           KIM TUYẾN
+        ========================= */
+
+        .sparkle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            animation:
+                sparkleMove 4s linear infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes sparkleMove {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+
+                opacity: 1;
+            }
+
+            to {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-200px);
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            .envelope {
+
+                width: 280px;
+
+                height: 200px;
+            }
+
+
+            .flap {
+
+                border-left: 140px solid transparent;
+
+                border-right: 140px solid transparent;
+
+                border-top: 110px solid #ec8ea5;
+            }
+
+
+            .letter-content h1 {
+
+                font-size: 30px;
+            }
+
+
+            #typingText {
+
+                font-size: 18px;
+
+                line-height: 1.8;
+
+                min-height: 180px;
+            }
+
+
+            .question-content h1 {
+
+                font-size: 30px;
+            }
+
+
+            .question-content p {
+
+                font-size: 17px;
+            }
+
+
+            .big-heart {
+
+                font-size: 65px;
+            }
+
+
+            .answer-buttons {
+
+                gap: 15px;
+            }
+
+
+            .answer-buttons button {
+
+                padding: 13px 25px;
+
+                font-size: 16px;
+            }
+        }
+
+    
+/* =========================
+   ĐĂNG NHẬP
+========================= */
+.login-screen{
+position:fixed;inset:0;
+background:linear-gradient(135deg,#ffe4ec,#fff0f5,#ffd6e5);
+display:flex;justify-content:center;align-items:center;
+z-index:9999;
+}
+.login-box{
+width:360px;background:white;padding:30px;border-radius:20px;
+text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+.login-box h2{color:#c2185b;margin-bottom:20px;}
+.login-box input{
+width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;
+border-radius:12px;font-size:16px;
+}
+.login-box button{
+width:100%;padding:12px;border:none;border-radius:12px;
+background:linear-gradient(135deg,#e91e63,#c2185b);
+color:white;font-size:16px;cursor:pointer;
+}
+#loginError{margin-top:10px;color:red;}
+.envelope-container{display:none;}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div id="loginScreen" class="login-screen">
+<div class="login-box">
+<h2>💖 Xác Nhận Thông Tin 💖</h2>
+<input type="text" id="userName" placeholder="Nhập tên">
+<input type="date" id="birthDate">
+<button onclick="checkLogin()">Xác nhận ❤️</button>
+<p id="loginError"></p>
+</div>
+</div>
+
+
+
+    <!-- =========================
+         NHẠC
+    ========================= -->
+
+    <audio id="bgMusic" loop>
+
+        <source
+            src="music.mp3"
+            type="audio/mpeg">
+
+    </audio>
+
+
+    <!-- =========================
+         PHONG BÌ
+    ========================= -->
+
+    <div class="envelope-container">
+
+        <div
+            class="envelope"
+            id="envelope">
+
+            <div class="base"></div>
+
+            <div class="flap"></div>
+
+            <div class="seal">
+                ❤️
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LÁ THƯ
+    ========================= -->
+
+    <div
+        class="letter"
+        id="letter">
+
+        <div class="letter-content">
+
+            <h1>
+                Gửi Linh ❤️
+            </h1>
+
+            <p id="typingText"></p>
+
+
+            <!-- Nút chỉ hiện sau khi đọc xong -->
+
+            <button
+                class="continue-btn"
+                id="continueBtn">
+
+                Tiếp tục ❤️
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MÀN HÌNH CÂU HỎI
+    ========================= -->
+
+    <div
+        class="question-screen"
+        id="questionScreen">
+
+        <div class="question-content">
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+
+            <h1>
+                Em có thương tôi không?
+            </h1>
+
+
+            <p>
+                Hãy trả lời thật lòng nhé... 🥺
+            </p>
+
+
+            <div class="answer-buttons">
+
+                <button
+                    id="yesBtn"
+                    class="yes-btn">
+
+                    Đồng ý 💗
+
+                </button>
+
+
+                <button
+                    id="noBtn"
+                    class="no-btn">
+
+                    Không 💔
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+function checkLogin(){
+const name=document.getElementById("userName").value.trim();
+const date=document.getElementById("birthDate").value;
+const correctName="Linh";
+const correctDate="07-07-2006";
+
+if(name.toLowerCase()===correctName.toLowerCase() && date===correctDate){
+document.getElementById("loginScreen").style.display="none";
+document.querySelector(".envelope-container").style.display="block";
+}else{
+document.getElementById("loginError").innerHTML="❌ Sai tên hoặc ngày sinh";
+}
+}
+
+
+
+        /* =========================
+           LẤY ELEMENT
+        ========================= */
+
+        const envelope =
+            document.getElementById("envelope");
+
+        const letter =
+            document.getElementById("letter");
+
+        const music =
+            document.getElementById("bgMusic");
+
+        const typingText =
+            document.getElementById("typingText");
+
+        const continueBtn =
+            document.getElementById("continueBtn");
+
+        const questionScreen =
+            document.getElementById("questionScreen");
+
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+        const noBtn =
+            document.getElementById("noBtn");
+
+
+        /* =========================
+           NỘI DUNG BỨC THƯ
+        ========================= */
+
+        const message = `Cảm ơn em đã đến bên anh.
+
+Chúc em luôn vui vẻ, hạnh phúc và đạt được mọi điều mình mong muốn.
+
+Dù tương lai thế nào, anh vẫn mong em luôn mỉm cười và sống thật hạnh phúc.
+
+Yêu em rất nhiều ❤️`;
+
+
+        /* =========================
+           HIỆU ỨNG GÕ CHỮ
+        ========================= */
+
+        function typeWriter(
+            text,
+            element,
+            speed = 60
+        ) {
+
+            let i = 0;
+
+            element.innerHTML = "";
+
+            // Ẩn nút tiếp tục lúc đầu
+
+            continueBtn.classList.remove("show");
+
+
+            function typing() {
+
+                if (i < text.length) {
+
+                    if (text.charAt(i) === "\n") {
+
+                        element.innerHTML += "<br>";
+
+                    } else {
+
+                        element.innerHTML +=
+                            text.charAt(i);
+                    }
+
+
+                    i++;
+
+                    setTimeout(
+                        typing,
+                        speed
+                    );
+
+                } else {
+
+                    /*
+                     * Khi gõ hết thư
+                     * mới hiện nút
+                     */
+
+                    setTimeout(() => {
+
+                        continueBtn.classList.add(
+                            "show"
+                        );
+
+                    }, 500);
+                }
+            }
+
+
+            typing();
+        }
+
+
+
+        /* =========================
+           CLICK PHONG BÌ
+        ========================= */
+
+        envelope.addEventListener(
+            "click",
+            () => {
+
+                document.body.classList.add(
+                    "open"
+                );
+
+
+                // Mở nắp
+
+                document
+                    .querySelector(".flap")
+                    .style.transform =
+                    "rotateX(180deg)";
+
+
+                // Hiện thư
+
+                letter.style.opacity = "1";
+
+                letter.style.visibility =
+                    "visible";
+
+
+                // Phát nhạc
+
+                music.play().catch(() => {});
+
+
+                // Bắt đầu gõ
+
+                setTimeout(() => {
+
+                    typeWriter(
+                        message,
+                        typingText,
+                        60
+                    );
+
+                }, 800);
+
+            }
+        );
+
+
+
+        /* =========================
+           TIẾP TỤC
+        ========================= */
+
+        continueBtn.addEventListener(
+            "click",
+            () => {
+
+                // Thư biến mất
+
+                letter.style.opacity = "0";
+
+                letter.style.visibility =
+                    "hidden";
+
+
+                // Hiện màn hình câu hỏi
+
+                setTimeout(() => {
+
+                    questionScreen.classList.add(
+                        "show"
+                    );
+
+                }, 600);
+
+            }
+        );
+
+
+
+        /* =========================
+           NÚT ĐỒNG Ý
+        ========================= */
+
+        yesBtn.addEventListener(
+            "click",
+            () => {
+
+                questionScreen.innerHTML = `
+
+                    <div class="question-content">
+
+                        <div class="big-heart">
+                            💖
+                        </div>
+
+                        <h1>
+                            Anh biết mà... ❤️
+                        </h1>
+
+                        <p>
+                            Cảm ơn em vì đã thương anh.<br>
+                            Anh sẽ luôn trân trọng
+                            tình cảm này.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                // Tạo thêm tim khi đồng ý
+
+                for (let i = 0; i < 30; i++) {
+
+                    const heart =
+                        document.createElement("div");
+
+                    heart.innerHTML = "💖";
+
+                    heart.style.position =
+                        "fixed";
+
+                    heart.style.left =
+                        Math.random() * 100 + "vw";
+
+                    heart.style.top =
+                        "100vh";
+
+                    heart.style.fontSize =
+                        (15 + Math.random() * 30)
+                        + "px";
+
+                    heart.style.zIndex = "300";
+
+                    heart.style.pointerEvents =
+                        "none";
+
+                    heart.style.animation =
+                        "floatUp " +
+                        (3 + Math.random() * 4) +
+                        "s linear forwards";
+
+                    document.body.appendChild(
+                        heart
+                    );
+
+
+                    setTimeout(() => {
+
+                        heart.remove();
+
+                    }, 8000);
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           NÚT "KHÔNG" CHẠY TRỐN
+        ========================= */
+
+        function runAway() {
+
+            const padding = 20;
+
+            const yesRect =
+                yesBtn.getBoundingClientRect();
+
+
+            let randomX;
+            let randomY;
+
+            let safePosition = false;
+
+
+            /*
+             * Thử tối đa 50 vị trí
+             * để tránh nút Đồng ý
+             */
+
+            for (
+                let i = 0;
+                i < 50;
+                i++
+            ) {
+
+                const maxX =
+                    window.innerWidth -
+                    noBtn.offsetWidth -
+                    padding;
+
+
+                const maxY =
+                    window.innerHeight -
+                    noBtn.offsetHeight -
+                    padding;
+
+
+                randomX =
+                    padding +
+                    Math.random() *
+                    Math.max(
+                        0,
+                        maxX - padding
+                    );
+
+
+                randomY =
+                    padding +
+                    Math.random() *
+                    Math.max(
+                        0,
+                        maxY - padding
+                    );
+
+
+                const noLeft =
+                    randomX;
+
+                const noRight =
+                    randomX +
+                    noBtn.offsetWidth;
+
+
+                const noTop =
+                    randomY;
+
+                const noBottom =
+                    randomY +
+                    noBtn.offsetHeight;
+
+
+                const overlapsYes =
+
+                    noRight >
+                    yesRect.left - 30 &&
+
+                    noLeft <
+                    yesRect.right + 30 &&
+
+                    noBottom >
+                    yesRect.top - 30 &&
+
+                    noTop <
+                    yesRect.bottom + 30;
+
+
+                if (!overlapsYes) {
+
+                    safePosition = true;
+
+                    break;
+                }
+            }
+
+
+            /*
+             * Nếu không tìm được vị trí
+             */
+
+            if (!safePosition) {
+
+                randomX = 20;
+
+                randomY = 20;
+            }
+
+
+            // Cho nút chạy khắp màn hình
+
+            noBtn.style.position =
+                "fixed";
+
+            noBtn.style.left =
+                randomX + "px";
+
+            noBtn.style.top =
+                randomY + "px";
+
+
+            // Đổi chữ một chút
+
+            noBtn.innerHTML =
+                "Không 💔";
+        }
+
+
+
+        /* =========================
+           MÁY TÍNH
+           RÊ CHUỘT → NÚT CHẠY
+        ========================= */
+
+        noBtn.addEventListener(
+            "mouseenter",
+            runAway
+        );
+
+
+
+        /* =========================
+           ĐIỆN THOẠI
+           CHẠM → NÚT CHẠY
+        ========================= */
+
+        noBtn.addEventListener(
+            "touchstart",
+            (event) => {
+
+                event.preventDefault();
+
+                runAway();
+
+            },
+            {
+                passive: false
+            }
+        );
+
+
+
+        /* =========================
+           CLICK → CHẠY TIẾP
+        ========================= */
+
+        noBtn.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                runAway();
+
+            }
+        );
+
+
+
+        /* =========================
+           HOA HỒNG
+        ========================= */
+
+        for (
+            let i = 0;
+            i < 35;
+            i++
+        ) {
+
+            const rose =
+                document.createElement("div");
+
+            rose.className = "rose";
+
+            rose.innerHTML = "🌹";
+
+
+            rose.style.left =
+                Math.random() * 100 + "vw";
+
+
+            rose.style.fontSize =
+                (20 + Math.random() * 25)
+                + "px";
+
+
+            rose.style.animationDuration =
+                (6 + Math.random() * 8)
+                + "s";
+
+
+            rose.style.animationDelay =
+                Math.random() * 5 + "s";
+
+
+            document.body.appendChild(
+                rose
+            );
+        }
+
+
+
+        /* =========================
+           TIM BAY
+        ========================= */
+
+        for (
+            let i = 0;
+            i < 45;
+            i++
+        ) {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML = "❤️";
+
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+
+            heart.style.fontSize =
+                (12 + Math.random() * 25)
+                + "px";
+
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 8)
+                + "s";
+
+
+            heart.style.animationDelay =
+                Math.random() * 5 + "s";
+
+
+            document.body.appendChild(
+                heart
+            );
+        }
+
+
+
+        /* =========================
+           KIM TUYẾN
+        ========================= */
+
+        for (
+            let i = 0;
+            i < 120;
+            i++
+        ) {
+
+            const sparkle =
+                document.createElement("div");
+
+            sparkle.className =
+                "sparkle";
+
+
+            sparkle.style.left =
+                Math.random() * 100 + "vw";
+
+
+            sparkle.style.top =
+                Math.random() * 100 + "vh";
+
+
+            sparkle.style.animationDelay =
+                Math.random() * 4 + "s";
+
+
+            document.body.appendChild(
+                sparkle
+            );
+        }
+
+
+    </script>
+
+</body>
+
+</html>
